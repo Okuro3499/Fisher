@@ -2,6 +2,7 @@ package com.jade.fisher;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +20,9 @@ public class SignUpActivity extends AppCompatActivity {
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SignUpActivity.this, "It Works", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(SignUpActivity.this, ProductsActivity.class);
+                startActivity(intent);
+                Toast.makeText(SignUpActivity.this, "Account created successfully", Toast.LENGTH_LONG).show();
             }
         });
     }
