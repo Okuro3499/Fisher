@@ -1,9 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.jade.fisher.SignUpActivity"
+    android:background="#121111">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:src="@drawable/fish"
+        android:scaleType="centerCrop" />
+
+    <EditText
+        android:id="@+id/firstname"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lastname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorTextIcons"
+        android:hint="Enter first name"
+        android:inputType="textEmailAddress"
+        android:padding="5dp"
+        android:selectAllOnFocus="true" />
+
+    <EditText
+        android:id="@+id/lastname"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/newusername"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorTextIcons"
+        android:hint="Enter last name"
+        android:inputType="textEmailAddress"
+        android:padding="5dp"
+        android:selectAllOnFocus="true" />
+
+    <EditText
+        android:id="@+id/newusername"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/newpassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorTextIcons"
+        android:hint="Enter email address"
+        android:inputType="textEmailAddress"
+        android:padding="5dp"
+        android:selectAllOnFocus="true" />
+
+    <EditText
+        android:id="@+id/newpassword"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/confirmpassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorTextIcons"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        android:padding="5dp"
+        android:selectAllOnFocus="true" />
+
+    <EditText
+        android:id="@+id/confirmpassword"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/createAccountButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorTextIcons"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:padding="5dp"
+        android:selectAllOnFocus="true" />
+
+    <Button
+        android:id="@+id/createAccountButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:text="create account" />
+
+</RelativeLayout>
