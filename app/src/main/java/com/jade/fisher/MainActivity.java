@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProductsActivity.class);
                 startActivity(intent);
+                Toast.makeText(MainActivity.this, "Successful login", Toast.LENGTH_LONG).show();
             }
         });
     }
