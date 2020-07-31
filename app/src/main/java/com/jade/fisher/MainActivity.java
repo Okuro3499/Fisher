@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "It works!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, ProductsActivity.class);
+                startActivity(intent);
             }
         });
     }
