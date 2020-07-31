@@ -11,6 +11,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private Button mViewProductsButton;
     private Button mLoginButton;
+    private Button mSignUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ProductsActivity.class);
                 startActivity(intent);
                 Toast.makeText(MainActivity.this, "Successful login", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        mSignUpButton = (Button) findViewById(R.id.signUpButton);
+        mSignUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "It Works", Toast.LENGTH_LONG).show();
             }
         });
     }

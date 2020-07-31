@@ -60,6 +60,19 @@
         android:text="sign in" />
 
     <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/loginButton"
+        android:text="Don't have an account? Sign Up"
+        android:textSize="10sp"
+        android:textColor="@color/colorTextIcons"
+        android:background="@android:color/transparent"
+        android:textStyle="bold"/>
+
+    <Button
         android:id="@+id/viewProductsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
