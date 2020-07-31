@@ -11,13 +11,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:text="FISHER"
-        android:textColor="@color/colorTextIcons" />
+        android:textColor="@color/colorTextIcons"
+        android:textSize="40sp"/>
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="View Products" />
+        android:text="View Products"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorTextIcons"/>
 </RelativeLayout>
