@@ -2,7 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
     android:background="#121111">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:src="@drawable/fish"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -12,10 +21,12 @@
         android:layout_marginTop="35dp"
         android:text="FISHER"
         android:textColor="@color/colorTextIcons"
-        android:textSize="40sp"/>
+        android:textSize="40sp"
+        android:id="@+id/FISHER"
+        android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/viewProductsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
