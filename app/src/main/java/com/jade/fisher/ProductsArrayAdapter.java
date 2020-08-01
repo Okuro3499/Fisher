@@ -16,4 +16,16 @@ public class ProductsArrayAdapter extends ArrayAdapter {
         this.mFishes = mFishes;
         this.mAges = mAges;
     }
+
+    @Override
+    public Object getItem(int position) {
+        String fish = mFishes[position];
+        String age = mAges[position];
+        return String.format("%s \nIs at stage: %s", fish, age);
+    }
+
+    @Override
+    public int getCount() {
+        return mFishes.length;
+    }
 }

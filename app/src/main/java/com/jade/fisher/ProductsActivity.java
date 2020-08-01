@@ -31,7 +31,7 @@ public class ProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_products);
         ButterKnife.bind(this);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, fishes);
+        ProductsArrayAdapter adapter = new ProductsArrayAdapter(this, android.R.layout.simple_list_item_1, fishes, age);
         mListView.setAdapter(adapter);
 
         mSearchButton.setOnClickListener(new View.OnClickListener() {
