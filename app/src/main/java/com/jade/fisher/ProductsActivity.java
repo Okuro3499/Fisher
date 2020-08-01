@@ -23,6 +23,7 @@ public class ProductsActivity extends AppCompatActivity {
     @BindView(R.id.searchTextView) TextView mSearchTextView;
     private String[] fishes = new String[] {"Guppy", "Neon Tetra", "Zebra fish", "Tiger barb", "Green swordtail", "Clown loach", "Red lionfish", "Bala shark",
                                             "Pao abei", "Gold Fish"};
+    private String[] age = new String[] {"larva", "juvenile", "adult", "yolk sac larva", "juvenile", "larva", "adult", "yolk sac larva", "adult", "adult"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
