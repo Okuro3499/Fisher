@@ -11,7 +11,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.viewProductsButton)Button mViewProductsButton;
     @BindView(R.id.loginButton) Button mLoginButton;
     @BindView(R.id.signUpButton) Button mSignUpButton;
@@ -22,29 +22,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mViewProductsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProductsActivity.class);
-                startActivity(intent);
-            }
-        });
+        mViewProductsButton.setOnClickListener(this);
+        mLoginButton.setOnClickListener(this);
+        mSignUpButton.setOnClickListener (this);
+    }
 
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProductsActivity.class);
-                startActivity(intent);
-                Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        mSignUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-                startActivity(intent);
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        if (v == mViewProductsButton) {
+            Intent intent = new Intent(MainActivity.this, ProductsActivity.class);
+            startActivity(intent);
+        }
+        if (v == mLoginButton) {
+            Intent intent = new Intent(MainActivity.this, ProductsActivity.class);
+            startActivity(intent);
+            Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+        }
+        if(v == mSignUpButton) {
+            Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+            startActivity(intent);
+        }
     }
 }

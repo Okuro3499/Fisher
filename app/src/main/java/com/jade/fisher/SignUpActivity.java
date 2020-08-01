@@ -11,7 +11,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.createAccountButton) Button mCreateAccountButton;
 
     @Override
@@ -20,13 +20,15 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
 
-        mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignUpActivity.this, ProductsActivity.class);
-                startActivity(intent);
-                Toast.makeText(SignUpActivity.this, "Account created successfully", Toast.LENGTH_LONG).show();
-            }
-        });
+        mCreateAccountButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mCreateAccountButton) {
+            Intent intent = new Intent(SignUpActivity.this, ProductsActivity.class);
+            startActivity(intent);
+            Toast.makeText(SignUpActivity.this, "Account created successfully", Toast.LENGTH_LONG).show();
+        }
     }
 }
