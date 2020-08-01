@@ -34,6 +34,7 @@
         android:layout_marginBottom="10dp"
         android:background="@color/colorTextIcons"
         android:hint="Email"
+        android:drawableLeft="@android:drawable/ic_dialog_email"
         android:inputType="textEmailAddress"
         android:padding="5dp"
         android:selectAllOnFocus="true" />
@@ -48,6 +49,7 @@
         android:background="@color/colorTextIcons"
         android:hint="Password"
         android:inputType="textPassword"
+        android:drawableLeft="@android:drawable/ic_lock_lock"
         android:padding="5dp"
         android:selectAllOnFocus="true" />
 
