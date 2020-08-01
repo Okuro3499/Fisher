@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,11 +13,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ProductsActivity extends AppCompatActivity {
-    private Button mSearchButton;
-    private EditText mSearchEditText;
-    private ListView mListView;
-    private TextView mSearchTextView;
+    @BindView(R.id.searchButton) Button mSearchButton;
+    @BindView(R.id.searchEditText) EditText mSearchEditText;
+    @BindView(R.id.listView) ListView mListView;
+    @BindView(R.id.searchTextView) TextView mSearchTextView;
     private String[] fishes = new String[] {"Guppy", "Neon Tetra", "Zebra fish", "Tiger barb", "Green swordtail", "Clown loach", "Red lionfish", "Bala shark",
                                             "Pao abei", "Gold Fish"};
 
@@ -26,13 +28,11 @@ public class ProductsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
-        mListView = (ListView) findViewById(R.id.listView);
-        mSearchEditText = (EditText) findViewById(R.id.searchEditText);
+        ButterKnife.bind(this);
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, fishes);
         mListView.setAdapter(adapter);
 
-        mSearchButton = (Button) findViewById(R.id.searchButton);
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +41,6 @@ public class ProductsActivity extends AppCompatActivity {
                 intent.putExtra("search", search);
                 Toast.makeText(ProductsActivity.this, search, Toast.LENGTH_LONG).show();
 
-                mSearchTextView = (TextView) findViewById(R.id.searchTextView);
                 mSearchTextView.setText("Products found: " + search);
             }
         });
