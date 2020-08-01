@@ -16,6 +16,8 @@ public class ProductsActivity extends AppCompatActivity {
     private Button mSearchButton;
     private EditText mSearchEditText;
     private TextView mSearchTextView;
+    private String[] fishes = new String[] {"Guppy", "Neon Tetra", "Zebrafish", "Tiger barb", "Green swordtail", "Clown loach", "Red loinfish", "Bala shark",
+                                            "Pao abei", "Gold Fish"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,6 @@ public class ProductsActivity extends AppCompatActivity {
                 Toast.makeText(ProductsActivity.this, search, Toast.LENGTH_LONG).show();
 
                 mSearchTextView = (TextView) findViewById(R.id.searchTextView);
-//                String search = intent.getStringExtra("search");
                 mSearchTextView.setText("Products found: " + search);
             }
         });
