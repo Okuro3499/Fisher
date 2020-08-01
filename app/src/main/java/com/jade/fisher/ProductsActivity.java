@@ -28,13 +28,13 @@ public class ProductsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String search = mSearchEditText.getText().toString();
-                Log.d(TAG, search);
+                Intent intent = getIntent();
+                intent.putExtra("search", search);
                 Toast.makeText(ProductsActivity.this, search, Toast.LENGTH_LONG).show();
 
                 mSearchTextView = (TextView) findViewById(R.id.searchTextView);
-                Intent intent = getIntent();
-                String psearch = intent.getStringExtra("psearch");
-                mSearchTextView.setText("Products found: " + psearch);
+//                String search = intent.getStringExtra("search");
+                mSearchTextView.setText("Products found: " + search);
             }
         });
     }
