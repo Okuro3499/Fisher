@@ -21,7 +21,7 @@ public class ProductsArrayAdapter extends ArrayAdapter {
     public Object getItem(int position) {
         String fish = mFishes[position];
         String age = mAges[position];
-        return String.format("%s \nIs at life cycle stage: %s", fish, age);
+        return String.format("%s \nLife cycle stage: %s", fish, age);
     }
 
     @Override
