@@ -60,7 +60,7 @@ The instructions below will help you in project setup and testing in your local 
 
 * Searching Data
 
-![alt text](https://github.com/linusmbae/Cynix/blob/master/app/src/main/res/drawable-v24/jpg)
+![alt text](https://github.com/linusmbae/Cynix/blob/master/app/src/main/res/drawable-v24/search.jpg)
 
 # Technologies used
 
