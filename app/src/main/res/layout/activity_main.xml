@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.jade.fisher.MainActivity"
+    tools:context="com.jade.fisher.ui.MainActivity"
     android:background="#121111">
 
     <ImageView
@@ -27,10 +27,10 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/editTextEmail"
         android:layout_width="272dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/password"
+        android:layout_above="@+id/editTextPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:background="@color/colorTextIcons"
@@ -41,7 +41,7 @@
         android:selectAllOnFocus="true" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/editTextPassword"
         android:layout_width="272dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/loginButton"

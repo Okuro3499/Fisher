@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Fisher</string>
+    <string name="emailerror">Enter a valid email</string>
+    <string name="nameerror">Name must only consist of letters</string>
 </resources>

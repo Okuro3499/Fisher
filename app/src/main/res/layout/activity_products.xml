@@ -23,8 +23,6 @@
         android:layout_below="@id/searchEditText"
         android:layout_marginLeft="15dp"/>
 
-
-
     <Button
         android:id="@+id/searchButton"
         android:layout_width="50dp"

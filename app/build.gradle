@@ -49,5 +49,6 @@ dependencies {
     testImplementation 'androidx.test:core:1.0.0'
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    implementation 'com.basgeekball:awesome-validation:1.3'
 
 }

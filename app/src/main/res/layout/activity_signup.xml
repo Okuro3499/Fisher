@@ -14,10 +14,10 @@
         android:scaleType="centerCrop" />
 
     <EditText
-        android:id="@+id/firstname"
+        android:id="@+id/editTextFirstName"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/lastname"
+        android:layout_above="@+id/editTextLastName"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:background="@color/colorTextIcons"
@@ -27,10 +27,10 @@
         android:selectAllOnFocus="true" />
 
     <EditText
-        android:id="@+id/lastname"
+        android:id="@+id/editTextLastName"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/newusername"
+        android:layout_above="@+id/editTextNewEmail"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:background="@color/colorTextIcons"
@@ -40,10 +40,10 @@
         android:selectAllOnFocus="true" />
 
     <EditText
-        android:id="@+id/newusername"
+        android:id="@+id/editTextNewEmail"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/newpassword"
+        android:layout_above="@+id/editTextNewPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:background="@color/colorTextIcons"
@@ -53,10 +53,10 @@
         android:selectAllOnFocus="true" />
 
     <EditText
-        android:id="@+id/newpassword"
+        android:id="@+id/editTextNewPassword"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/confirmpassword"
+        android:layout_above="@+id/editTextConfirmPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:background="@color/colorTextIcons"
@@ -66,7 +66,7 @@
         android:selectAllOnFocus="true" />
 
     <EditText
-        android:id="@+id/confirmpassword"
+        android:id="@+id/editTextConfirmPassword"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/createAccountButton"
