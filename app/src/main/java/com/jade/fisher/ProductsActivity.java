@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +26,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductsActivity extends AppCompatActivity {
+    private static final String TAG = ProductsActivity.class.getSimpleName();
     @BindView(R.id.searchButton) Button mSearchButton;
     @BindView(R.id.searchEditText) EditText mSearchEditText;
     @BindView(R.id.listView) ListView mListView;
     @BindView(R.id.searchTextView) TextView mSearchTextView;
+    @BindView(R.id.errorTextView) TextView mErrorTextView;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
     private String[] fishes = new String[]{"Guppy", "Neon Tetra", "Zebra fish", "Tiger barb", "Green swordtail", "Clown loach", "Red lionfish", "Bala shark",
             "Pao abei", "Gold Fish"};
     private String[] age = new String[]{"larva", "juvenile", "adult", "yolk sac larva", "juvenile", "larva", "adult", "yolk sac larva", "adult", "adult"};
@@ -48,10 +53,16 @@ public class ProductsActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Specie>>() {
             @Override
             public void onResponse(Call<List<Specie>> call, Response<List<Specie>> response) {
+                hideProgressBar();
+
                 if (!response.isSuccessful()) {
                     mSearchTextView.setText("Code: " + response.code());
                     return;
                 }
+//                else {
+//                    showUnsuccessfulMessage();
+//                }
+
                 List<Specie> species = response.body();
 
                 for (Specie specie : species) {
@@ -62,12 +73,17 @@ public class ProductsActivity extends AppCompatActivity {
                     content += "Physical Description: " + specie.getPhysicalDescription() + "\n\n";
 
                     mSearchTextView.append(content);
+
+                    showSpecie();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Specie>> call, Throwable t) {
                 mSearchTextView.setText(t.getMessage());
+                Log.e(TAG, "onFailure: ", t);
+                hideProgressBar();
+                showFailureMessage();
             }
         });
 
@@ -93,6 +109,25 @@ public class ProductsActivity extends AppCompatActivity {
                 Toast.makeText(ProductsActivity.this, fish, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void showFailureMessage() {
+        mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void showUnsuccessfulMessage() {
+        mErrorTextView.setText("Something went wrong. Please try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void showSpecie() {
+        mListView.setVisibility(View.VISIBLE);
+        mSearchTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
     }
 }
 
