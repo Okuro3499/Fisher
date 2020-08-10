@@ -13,23 +13,63 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductsActivity extends AppCompatActivity {
     @BindView(R.id.searchButton) Button mSearchButton;
     @BindView(R.id.searchEditText) EditText mSearchEditText;
     @BindView(R.id.listView) ListView mListView;
     @BindView(R.id.searchTextView) TextView mSearchTextView;
-    private String[] fishes = new String[] {"Guppy", "Neon Tetra", "Zebra fish", "Tiger barb", "Green swordtail", "Clown loach", "Red lionfish", "Bala shark",
-                                            "Pao abei", "Gold Fish"};
-    private String[] age = new String[] {"larva", "juvenile", "adult", "yolk sac larva", "juvenile", "larva", "adult", "yolk sac larva", "adult", "adult"};
+    private String[] fishes = new String[]{"Guppy", "Neon Tetra", "Zebra fish", "Tiger barb", "Green swordtail", "Clown loach", "Red lionfish", "Bala shark",
+            "Pao abei", "Gold Fish"};
+    private String[] age = new String[]{"larva", "juvenile", "adult", "yolk sac larva", "juvenile", "larva", "adult", "yolk sac larva", "adult", "adult"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
         ButterKnife.bind(this);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://www.fishwatch.gov/api/species/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        FishWatchApi fishWatchApi = retrofit.create(FishWatchApi.class);
+
+        Call<List<Specie>> call = fishWatchApi.getSpecies();
+        call.enqueue(new Callback<List<Specie>>() {
+            @Override
+            public void onResponse(Call<List<Specie>> call, Response<List<Specie>> response) {
+                if (!response.isSuccessful()) {
+                    mSearchTextView.setText("Code: " + response.code());
+                    return;
+                }
+                List<Specie> species = response.body();
+
+                for (Specie specie : species) {
+                    String content = "";
+                    content += "Species Name: " + specie.getSpeciesName() + "\n";
+                    content += "Scientific Name: " + specie.getScientificName() + "\n";
+                    content += "Health Benefits: " + specie.getHealthBenefits() + "\n";
+                    content += "Physical Description: " + specie.getPhysicalDescription() + "\n\n";
+
+                    mSearchTextView.append(content);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Specie>> call, Throwable t) {
+                mSearchTextView.setText(t.getMessage());
+            }
+        });
 
         ProductsArrayAdapter adapter = new ProductsArrayAdapter(this, android.R.layout.simple_list_item_1, fishes, age);
         mListView.setAdapter(adapter);
@@ -47,12 +87,12 @@ public class ProductsActivity extends AppCompatActivity {
         });
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            String fish = ((TextView)view).getText().toString();
-            Toast.makeText(ProductsActivity.this, fish, Toast.LENGTH_LONG).show();
-        }
-    });
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String fish = ((TextView) view).getText().toString();
+                Toast.makeText(ProductsActivity.this, fish, Toast.LENGTH_LONG).show();
+            }
+        });
     }
-
 }
+
