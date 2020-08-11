@@ -44,7 +44,7 @@ public class FishActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.fishwatch.gov/api/species/all/")
+                .baseUrl("https://www.fishwatch.gov/api/species/Monkfish/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         FishWatchApi fishWatchApi = retrofit.create(FishWatchApi.class);
