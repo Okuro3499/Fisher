@@ -7,7 +7,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context="com.jade.fisher.ui.ProductsActivity" >
+    tools:context="com.jade.fisher.ui.FishActivity" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

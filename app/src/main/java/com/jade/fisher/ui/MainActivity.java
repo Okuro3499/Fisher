@@ -49,12 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == mViewProductsButton) {
-            Intent intent = new Intent(MainActivity.this, ProductsActivity.class);
+            Intent intent = new Intent(MainActivity.this, FishActivity.class);
             startActivity(intent);
         }
         if (v == mLoginButton) {
             if (awesomeValidation.validate()){
-                Intent intent = new Intent(MainActivity.this, ProductsActivity.class);
+                Intent intent = new Intent(MainActivity.this, FishActivity.class);
                 startActivity(intent);
                 Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
             }

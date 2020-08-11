@@ -28,8 +28,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ProductsActivity extends AppCompatActivity {
-    private static final String TAG = ProductsActivity.class.getSimpleName();
+public class FishActivity extends AppCompatActivity {
+    private static final String TAG = FishActivity.class.getSimpleName();
     @BindView(R.id.searchButton) Button mSearchButton;
     @BindView(R.id.searchEditText) EditText mSearchEditText;
     @BindView(R.id.listView) ListView mListView;
@@ -87,7 +87,7 @@ public class ProductsActivity extends AppCompatActivity {
                 String search = mSearchEditText.getText().toString();
                 Intent intent = getIntent();
                 intent.putExtra("search", search);
-                Toast.makeText(ProductsActivity.this, search, Toast.LENGTH_LONG).show();
+                Toast.makeText(FishActivity.this, search, Toast.LENGTH_LONG).show();
 
                 mSearchTextView.setText("Products found: " + search);
             }
@@ -97,7 +97,7 @@ public class ProductsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String fish = ((TextView) view).getText().toString();
-                Toast.makeText(ProductsActivity.this, fish, Toast.LENGTH_LONG).show();
+                Toast.makeText(FishActivity.this, fish, Toast.LENGTH_LONG).show();
             }
         });
     }

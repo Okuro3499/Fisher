@@ -3,7 +3,7 @@ package com.jade.fisher;
 import android.content.Intent;
 import android.widget.TextView;
 
-import com.jade.fisher.ui.ProductsActivity;
+import com.jade.fisher.ui.FishActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,11 +17,11 @@ import static org.junit.Assert.assertTrue;
 @RunWith(RobolectricTestRunner.class)
 
 public class ProductsActivityTest {
-    private ProductsActivity activity;
+    private FishActivity activity;
 
     @Before
     public void setUp() {
-        activity = Robolectric.setupActivity(ProductsActivity.class);
+        activity = Robolectric.setupActivity(FishActivity.class);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class ProductsActivityTest {
     @Test
     public void secondActivityStarted() {
         activity.findViewById(R.id.searchButton).performClick();
-        Intent expectedIntent = new Intent(activity, ProductsActivity.class);
+        Intent expectedIntent = new Intent(activity, FishActivity.class);
         ShadowActivity shadowActivity = org.robolectric.Shadows.shadowOf(activity);
         Intent actualIntent = shadowActivity.getNextStartedActivity();
         assertTrue(actualIntent.filterEquals(expectedIntent));

@@ -6,7 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
-import com.jade.fisher.ui.ProductsActivity;
+import com.jade.fisher.ui.FishActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,8 +28,8 @@ import static org.hamcrest.Matchers.not;
 @LargeTest
 public class ProductsActivityInstrumentationTest {
     @Rule
-    public ActivityTestRule<ProductsActivity> activityTestRule =
-            new ActivityTestRule<>(ProductsActivity.class);
+    public ActivityTestRule<FishActivity> activityTestRule =
+            new ActivityTestRule<>(FishActivity.class);
 
     @Test
     public void validateEditText() {

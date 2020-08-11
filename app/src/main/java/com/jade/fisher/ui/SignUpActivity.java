@@ -50,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         if (v == mCreateAccountButton) {
             if (awesomeValidation.validate()){
-                Intent intent = new Intent(SignUpActivity.this, ProductsActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, FishActivity.class);
                 startActivity(intent);
                 Toast.makeText(SignUpActivity.this, "Account created successfully", Toast.LENGTH_LONG).show();
             }
