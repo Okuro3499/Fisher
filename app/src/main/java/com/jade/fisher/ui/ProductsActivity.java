@@ -1,4 +1,4 @@
-package com.jade.fisher;
+package com.jade.fisher.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,13 +7,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.jade.fisher.network.FishWatchApi;
+import com.jade.fisher.R;
+import com.jade.fisher.models.Specie;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.jade.fisher;
+package com.jade.fisher.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.jade.fisher.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

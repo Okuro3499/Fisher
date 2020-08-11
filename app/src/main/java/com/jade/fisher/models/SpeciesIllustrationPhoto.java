@@ -1,10 +1,10 @@
 
-package com.jade.fisher;
+package com.jade.fisher.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ImageGallery {
+public class SpeciesIllustrationPhoto {
 
     @SerializedName("src")
     @Expose
@@ -20,7 +20,7 @@ public class ImageGallery {
      * No args constructor for use in serialization
      * 
      */
-    public ImageGallery() {
+    public SpeciesIllustrationPhoto() {
     }
 
     /**
@@ -29,7 +29,7 @@ public class ImageGallery {
      * @param alt
      * @param title
      */
-    public ImageGallery(String src, String alt, String title) {
+    public SpeciesIllustrationPhoto(String src, String alt, String title) {
         super();
         this.src = src;
         this.alt = alt;

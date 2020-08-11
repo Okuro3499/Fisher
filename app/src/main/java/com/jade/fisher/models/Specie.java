@@ -1,5 +1,5 @@
 
-package com.jade.fisher;
+package com.jade.fisher.models;
 
 import java.util.List;
 

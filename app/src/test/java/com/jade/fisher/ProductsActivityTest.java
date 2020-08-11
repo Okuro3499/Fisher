@@ -3,6 +3,8 @@ package com.jade.fisher;
 import android.content.Intent;
 import android.widget.TextView;
 
+import com.jade.fisher.ui.ProductsActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

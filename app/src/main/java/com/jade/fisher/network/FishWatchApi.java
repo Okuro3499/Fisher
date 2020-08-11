@@ -1,4 +1,6 @@
-package com.jade.fisher;
+package com.jade.fisher.network;
+
+import com.jade.fisher.models.Specie;
 
 import java.util.List;
 
