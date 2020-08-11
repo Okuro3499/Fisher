@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.jade.fisher.R;
+
 public class FishDetailActivity extends AppCompatActivity {
 
     @Override

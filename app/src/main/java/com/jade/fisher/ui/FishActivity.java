@@ -34,6 +34,8 @@ public class FishActivity extends AppCompatActivity {
     @BindView(R.id.searchEditText) EditText mSearchEditText;
     @BindView(R.id.listView) ListView mListView;
     @BindView(R.id.searchTextView) TextView mSearchTextView;
+    @BindView(R.id.errorTextView) TextView mErrorTextView;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class FishActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.fishwatch.gov/api/species/Monkfish/")
+                .baseUrl("https://www.fishwatch.gov/api/species/all/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         FishWatchApi fishWatchApi = retrofit.create(FishWatchApi.class);
@@ -59,18 +61,18 @@ public class FishActivity extends AppCompatActivity {
                     return;
                 }
 
-                List<Specie> species = response.body();
+                    List<Specie> species = response.body();
 
-                for (Specie specie : species) {
-                    String content = "";
-                    content += "Species Name: " + specie.getSpeciesName() + "\n";
-                    content += "Scientific Name: " + specie.getScientificName() + "\n";
-                    content += "Health Benefits: " + specie.getHealthBenefits() + "\n";
-                    content += "Physical Description: " + specie.getPhysicalDescription() + "\n\n";
+                    for (Specie specie : species) {
+                        String content = "";
+                        content += "Species Name: " + specie.getSpeciesName() + "\n";
+                        content += "Scientific Name: " + specie.getScientificName() + "\n";
+                        content += "Health Benefits: " + specie.getHealthBenefits() + "\n";
+                        content += "Physical Description: " + specie.getPhysicalDescription() + "\n\n";
 
-                    mSearchTextView.append(content);
+                        mSearchTextView.append(content);
+                    }
                 }
-            }
 
             @Override
             public void onFailure(Call<List<Specie>> call, Throwable t) {
@@ -89,7 +91,8 @@ public class FishActivity extends AppCompatActivity {
                 intent.putExtra("search", search);
                 Toast.makeText(FishActivity.this, search, Toast.LENGTH_LONG).show();
 
-                mSearchTextView.setText("Products found: " + search);
+                showSpecie();
+
             }
         });
 
@@ -101,8 +104,6 @@ public class FishActivity extends AppCompatActivity {
             }
         });
     }
-    @BindView(R.id.errorTextView) TextView mErrorTextView;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     private void showFailureMessage() {
         mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
