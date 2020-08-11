@@ -31,11 +31,6 @@ public class ProductsActivity extends AppCompatActivity {
     @BindView(R.id.searchEditText) EditText mSearchEditText;
     @BindView(R.id.listView) ListView mListView;
     @BindView(R.id.searchTextView) TextView mSearchTextView;
-    @BindView(R.id.errorTextView) TextView mErrorTextView;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
-    private String[] fishes = new String[]{"Guppy", "Neon Tetra", "Zebra fish", "Tiger barb", "Green swordtail", "Clown loach", "Red lionfish", "Bala shark",
-            "Pao abei", "Gold Fish"};
-    private String[] age = new String[]{"larva", "juvenile", "adult", "yolk sac larva", "juvenile", "larva", "adult", "yolk sac larva", "adult", "adult"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +39,7 @@ public class ProductsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.fishwatch.gov/api/species/")
+                .baseUrl("https://www.fishwatch.gov/api/species/Monkfish/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         FishWatchApi fishWatchApi = retrofit.create(FishWatchApi.class);
@@ -53,15 +48,13 @@ public class ProductsActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Specie>>() {
             @Override
             public void onResponse(Call<List<Specie>> call, Response<List<Specie>> response) {
+
                 hideProgressBar();
 
                 if (!response.isSuccessful()) {
                     mSearchTextView.setText("Code: " + response.code());
                     return;
                 }
-//                else {
-//                    showUnsuccessfulMessage();
-//                }
 
                 List<Specie> species = response.body();
 
@@ -73,8 +66,6 @@ public class ProductsActivity extends AppCompatActivity {
                     content += "Physical Description: " + specie.getPhysicalDescription() + "\n\n";
 
                     mSearchTextView.append(content);
-
-                    showSpecie();
                 }
             }
 
@@ -86,9 +77,6 @@ public class ProductsActivity extends AppCompatActivity {
                 showFailureMessage();
             }
         });
-
-        ProductsArrayAdapter adapter = new ProductsArrayAdapter(this, android.R.layout.simple_list_item_1, fishes, age);
-        mListView.setAdapter(adapter);
 
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +98,8 @@ public class ProductsActivity extends AppCompatActivity {
             }
         });
     }
+    @BindView(R.id.errorTextView) TextView mErrorTextView;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     private void showFailureMessage() {
         mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
