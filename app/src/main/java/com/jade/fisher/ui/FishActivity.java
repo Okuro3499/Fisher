@@ -28,6 +28,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.jade.fisher.Constants.FISHWATCH_BASE_URL;
+
 public class FishActivity extends AppCompatActivity {
     private static final String TAG = FishActivity.class.getSimpleName();
     @BindView(R.id.searchButton) Button mSearchButton;
@@ -44,7 +46,7 @@ public class FishActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.fishwatch.gov/api/species/Monkfish/")
+                .baseUrl(FISHWATCH_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         FishWatchApi fishWatchApi = retrofit.create(FishWatchApi.class);
