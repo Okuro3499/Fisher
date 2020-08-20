@@ -9,14 +9,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.jade.fisher.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final String TAG = MainActivity.class.getSimpleName();
+
+    @BindView(R.id.passwordLoginButton) Button mPasswordLoginButton;
+    @BindView(R.id.editTextEmail) EditText mEditTextEmail;
+    @BindView(R.id.editTextPassword) EditText mEditTextPassword;
     @BindView(R.id.registerTextView) TextView mRegisterTextView;
     @BindView(R.id.viewProductsButton)Button mViewProductsButton;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        mAuth = FirebaseAuth.getInstance();
+        mPasswordLoginButton.setOnClickListener(this);
         mRegisterTextView.setOnClickListener(this);
         mViewProductsButton.setOnClickListener(this);
     }
@@ -38,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
            Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
            startActivity(intent);
            finish();
+        }
+        if(view == mPasswordLoginButton) {
+            loginWithPassword();
         }
     }
 }

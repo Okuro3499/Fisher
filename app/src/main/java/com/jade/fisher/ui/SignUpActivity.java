@@ -28,12 +28,18 @@ import butterknife.ButterKnife;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = SignUpActivity.class.getSimpleName();
-    @BindView(R.id.createAccountButton) Button mCreateAccountButton;
-    @BindView(R.id.editTextName) EditText mEditTextName;
-    @BindView(R.id.editTextEmail) EditText mEditTextEmail;
-    @BindView(R.id.editTextPassword) EditText mEditTextPassword;
-    @BindView(R.id.editTextConfirmPassword) EditText mEditTextConfirmPassword;
-    @BindView(R.id.loginTextView) TextView mLoginTextView;
+    @BindView(R.id.createAccountButton)
+    Button mCreateAccountButton;
+    @BindView(R.id.editTextName)
+    EditText mEditTextName;
+    @BindView(R.id.editTextEmail)
+    EditText mEditTextEmail;
+    @BindView(R.id.editTextPassword)
+    EditText mEditTextPassword;
+    @BindView(R.id.editTextConfirmPassword)
+    EditText mEditTextConfirmPassword;
+    @BindView(R.id.loginTextView)
+    TextView mLoginTextView;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -79,18 +85,23 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         };
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
+    private void createFirebaseUserProfile(final FirebaseUser user) {
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
+        UserProfileChangeRequest addProfileName = new UserProfileChangeRequest.Builder()
+                .setDisplayName(mName)
+                .build();
+
+        user.updateProfile(addProfileName)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, user.getDisplayName());
+                        }
+                    }
+
+                });
     }
 
     @Override
@@ -101,7 +112,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             finish();
         }
         if (view == mCreateAccountButton) {
-           createNewUser();
+            createNewUser();
         }
     }
 
@@ -127,6 +138,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                         if (task.isSuccessful()) {
                             Log.d(TAG, "Authentication successful");
+                            createFirebaseUserProfile(task.getResult().getUser());
                         } else {
                             Toast.makeText(SignUpActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
@@ -164,22 +176,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         return true;
     }
 
-    private void createFirebaseUserProfile(final FirebaseUser user) {
-
-        UserProfileChangeRequest addProfileName = new UserProfileChangeRequest.Builder()
-                .setDisplayName(mName)
-                .build();
-
-        user.updateProfile(addProfileName)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, user.getDisplayName());
-                        }
-                    }
-
-                });
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
 }
