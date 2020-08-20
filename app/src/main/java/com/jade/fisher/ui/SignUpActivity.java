@@ -20,6 +20,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.jade.fisher.R;
 
 import butterknife.BindView;
@@ -37,6 +38,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private ProgressDialog mAuthProgressDialog;
+    private String mName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,13 +106,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void createNewUser() {
-        final String name = mEditTextName.getText().toString().trim();
+        mName = mEditTextName.getText().toString().trim();
         final String email = mEditTextEmail.getText().toString().trim();
         String password = mEditTextPassword.getText().toString().trim();
         String confirmPassword = mEditTextConfirmPassword.getText().toString().trim();
 
         boolean validEmail = isValidEmail(email);
-        boolean validName = isValidName(name);
+        boolean validName = isValidName(mName);
         boolean validPassword = isValidPassword(password, confirmPassword);
         if (!validEmail || !validName || !validPassword) return;
 
@@ -118,8 +120,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        mAuthProgressDialog.dismiss();
+
                         if (task.isSuccessful()) {
                             Log.d(TAG, "Authentication successful");
                         } else {
@@ -159,4 +164,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         return true;
     }
 
+    private void createFirebaseUserProfile(final FirebaseUser user) {
+
+        UserProfileChangeRequest addProfileName = new UserProfileChangeRequest.Builder()
+                .setDisplayName(mName)
+                .build();
+
+        user.updateProfile(addProfileName)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, user.getDisplayName());
+                        }
+                    }
+
+                });
+    }
 }
