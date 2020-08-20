@@ -1,59 +1,81 @@
 package com.jade.fisher.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.basgeekball.awesomevalidation.AwesomeValidation;
-import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.jade.fisher.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText editTextFirstName, editTextLastName, editTextNewEmail;
-
+    public static final String TAG = SignUpActivity.class.getSimpleName();
     @BindView(R.id.createAccountButton) Button mCreateAccountButton;
+    @BindView(R.id.editTextName) EditText mEditTextName;
+    @BindView(R.id.editTextEmail) EditText mEditTextEmail;
+    @BindView(R.id.editTextPassword) EditText mEditTextPassword;
+    @BindView(R.id.editTextConfirmPassword) EditText mEditTextConfirmPassword;
+    @BindView(R.id.loginTextView) TextView mLoginTextView;
 
-    private AwesomeValidation awesomeValidation;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
 
-        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+        mAuth = FirebaseAuth.getInstance();
 
-        editTextFirstName = (EditText) findViewById(R.id.editTextFirstName);
-        editTextLastName = (EditText) findViewById(R.id.editTextLastName);
-        editTextNewEmail = (EditText) findViewById(R.id.editTextNewEmail);
-
-        mCreateAccountButton = (Button) findViewById(R.id.createAccountButton);
-
+        mLoginTextView.setOnClickListener(this);
         mCreateAccountButton.setOnClickListener(this);
-
-        awesomeValidation.addValidation(this, R.id.editTextFirstName, "^[A-Za-z\\\\s]{1,}[\\\\.]{0,1}[A-Za-z\\\\s]{0,}$", R.string.nameerror);
-        awesomeValidation.addValidation(this, R.id.editTextLastName, "^[A-Za-z\\\\s]{1,}[\\\\.]{0,1}[A-Za-z\\\\s]{0,}$", R.string.nameerror);
-        awesomeValidation.addValidation(this, R.id.editTextNewEmail, Patterns.EMAIL_ADDRESS, R.string.emailerror);
-
     }
 
     @Override
-    public void onClick(View v) {
-        if (v == mCreateAccountButton) {
-            if (awesomeValidation.validate()){
-                Intent intent = new Intent(SignUpActivity.this, FishActivity.class);
-                startActivity(intent);
-                Toast.makeText(SignUpActivity.this, "Account created successfully", Toast.LENGTH_LONG).show();
-            }
+    public void onClick(View view) {
+        if (view == mLoginTextView) {
+            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
+        if (view == mCreateAccountButton) {
+           createNewUser();
+        }
+    }
+
+    private void createNewUser() {
+        final String name = mEditTextName.getText().toString().trim();
+        final String email = mEditTextEmail.getText().toString().trim();
+        String password = mEditTextPassword.getText().toString().trim();
+        String confirmPassword = mEditTextConfirmPassword.getText().toString().trim();
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Authentication successful");
+                        } else {
+                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }
